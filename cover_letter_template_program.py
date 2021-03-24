@@ -1,8 +1,8 @@
-#!/usr/bin/env python
-# coding: utf-8
+"""
+Created on 
+@author: Sahand-j
+"""
 
-# @author Sahand-J
-# easy version
 import re
 
 # template from Indeed.com
@@ -27,10 +27,12 @@ Sincerely,
 
 '''
 
-
-# This method takes in the text file (or string text) of Cover Letter template 
-# and formats it as with {} for .format method to work 
 def file_converter(s):
+    """
+    s: text file (or string text) of Cover Letter template 
+    formats input with {} for .format method to work
+    @return(String) formatted string 
+    """
     pars = s.split(']')
     reg = re.compile(r'\[[\s\S]*')
     empty = []
@@ -39,19 +41,31 @@ def file_converter(s):
     result = ''.join(empty)
     return result
      
-# returns array of requirements between []    
 def generate_list_of_req(s):
+    """
+    s: string template
+    generates list of requirements in template
+    :@return(Array): returns of requirements between brackets [] 
+    """
     res = re.findall(r"\[[^\]]*\]",s)
     return res
 
-
-# formed_text = formatted text with {}
-# sample_list = list of new user values
 def input_new_values(formed_text, sample_list):
+    """
+    formed_text: formatted text with {}
+    sample_list: list of new user values
+    formats text with user values
+    :@return(String) Re-formatted version of  
+    """
     return formed_text.format(*sample_list)
 
-#helper method to show template with numbered brackets
 def just_show_brackets_with_index(f):
+    """
+    f: 
+    helper method to show template with numbered brackets
+    :@return(String) Re-formatted version of  
+    """
+    
     smod = replace_brackets(f)
     pars = smod.split(')')
     reg = re.compile(r'\([\s\S]*')
@@ -62,18 +76,25 @@ def just_show_brackets_with_index(f):
         counter+=1
     return ''.join(empty)
     
-    
-#replacing method - from stackOverflow
 def replace_all(text, dic):
+    """
+    text: input string of template
+    dic: 
+    replacing method - from stackOverflow
+    :@return(String) with replaced parens for brackets
+    """
     for i, j in dic.items():
         text = text.replace(i, j)
     return text
 
-#replacing [] with {} for formatting reason
 def replace_brackets(string_data):
+    """
+    string_data: string template
+    replacing [] with {} for formatting reason, uses replace_all method
+    :@return(String) with repalced brackets with parens
+    """
     d = { '[': '(', ']': ')'}
     return replace_all(string_data, d)
-
 
 
 #Main Program
